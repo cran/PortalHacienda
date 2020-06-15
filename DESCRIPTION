@@ -1,7 +1,7 @@
 Package: PortalHacienda
 Type: Package
 Title: Acceder Con R a Los Datos Del Portal De Hacienda
-Version: 0.1.0
+Version: 0.1.2
 Authors@R: person("Fernando", "Garcia Diaz", email = "fmgarciadiaz78@gmail.com",
                   role = c("aut", "cre"))
 Description: Obtener listado de datos, acceder y extender series del Portal de 
@@ -21,8 +21,8 @@ Imports: dplyr (>= 0.8.5), forecast (>= 8.12), timetk (>= 1.0.0),
 RoxygenNote: 7.1.0
 Depends: R (>= 3.6.0)
 NeedsCompilation: no
-Packaged: 2020-06-07 22:06:17 UTC; fernandogarciadiaz
+Packaged: 2020-06-15 18:00:57 UTC; fernandogarciadiaz
 Author: Fernando Garcia Diaz [aut, cre]
 Maintainer: Fernando Garcia Diaz <fmgarciadiaz78@gmail.com>
 Repository: CRAN
-Date/Publication: 2020-06-13 13:20:06 UTC
+Date/Publication: 2020-06-15 23:50:13 UTC

@@ -4,11 +4,11 @@
 # FERGD 12-2017
 # 08-18: Actualización de series. Incremento del timeout default para evitar problemas recurrentes
 # 05-20: Preparado para CRAN. Se eliminó base offline y caracteres non-ASCII
+# 06-20: Correcciones para ser aceptado en CRAN
 # ==============================================================================
 
 # Importar el operador de pipe
 #' @importFrom magrittr "%>%"
-magrittr::`%>%`
 #' @importFrom utils "download.file"
 utils::globalVariables(c("serie_descripcion", "serie_id"))   # Evitar notes del check
 
@@ -16,8 +16,8 @@ utils::globalVariables(c("serie_descripcion", "serie_id"))   # Evitar notes del 
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage(
     "=============================================================================" %+% "\n" %+%
-    "Acceso API Portal Datos Hacienda - v 0.1.0 - 05-2020 por F.Garc" %+%
-    "\U00ED" %+% "a D" %+% "\U00ED" %+% "az" %+% "\n" )
+    "Acceso API Portal Datos Hacienda - v 0.1.2 - 06-2020 por F.Garc" %+%
+    "\U00ED" %+% "a D" %+% "\U00ED" %+% "az" %+% "\n")
 }
 
 # Definición Funciones internas helpers
@@ -54,9 +54,9 @@ freq <- function(x) {
 #' @export
 #' @examples
 #' # Cargar serie mensual de TCN
-#' TCN     <- Get("174.1_T_DE_CATES_0_0_32")
+#' TCN     <- Get("174.1_T_DE_CATES_0_0_32", start_date = "2017")
 #' # Cargar serie mensual de TCN, transformada en anual y en variaciones
-#' TCN <- Get("174.1_T_DE_CATES_0_0_32", start_date = 1999, collapse = "year",
+#' TCN <- Get("174.1_T_DE_CATES_0_0_32", start_date = 2015, collapse = "year",
 #' collapse_aggregation = "avg", representation_mode = "percent_change")
 Get <- function(series, start_date = NULL, end_date = NULL, representation_mode = NULL,
                 collapse = NULL, collapse_aggregation = NULL, limit = 1000, timeout = 5,
@@ -76,9 +76,9 @@ Get <- function(series, start_date = NULL, end_date = NULL, representation_mode 
   if (is.null(serie$result)) {
     stop("Error general o timeout, por favor verificar conexi\u00F3n.")
     }
-  suppressMessages(serie <- httr::content(serie$result , encoding = "UTF-8"))
+  suppressMessages(serie <- httr::content(serie$result, encoding = "UTF-8"))
   if ("errors" %in% names(serie)) stop("Error en la carga > " %+% serie$errors[[1]][[1]])
-  if(detail == TRUE){
+  if (detail == TRUE) {
     Listado <- Search_online()
     Nombres <-  Listado %>% dplyr::filter(grepl(gsub("\\,", "\\|", series), serie_id)) %>%
     dplyr::select(serie_id, serie_descripcion)                                                   # obtener descripciones
@@ -87,8 +87,7 @@ Get <- function(series, start_date = NULL, end_date = NULL, representation_mode 
     print("Cargada/s las series: " %+% Nombres[1] %+% ". Descripci\u00F3n: " %+% Nombres[2])
     print("Cargados " %+% length(serie) %+% " datos, desde " %+% min(zoo::index(serie)) %+%
           " hasta " %+% max(zoo::index(serie)) %+% " Periodicidad estimada: " %+% xts::periodicity(serie)$scale)
-  } else
-  {
+  } else {
     serie <- xts::xts(serie[, -1], order.by = lubridate::ymd(serie$indice_tiempo), unique = TRUE)  # Pasar a XTS
     attr(serie, "frequency") <- freq(serie)                                                        # Fijar frecuencia de la serie en el XTS
     print("Cargada/s las series...")
@@ -119,7 +118,9 @@ Get <- function(series, start_date = NULL, end_date = NULL, representation_mode 
 #'
 #' @examples
 #' # Forecast de 12 meses del tipo de cambio
-#' TCN <- Forecast(Get("174.1_T_DE_CATES_0_0_32"), N = 12 , confidence = c(80))
+#' \donttest{
+#' TCN <- Forecast(Get("174.1_T_DE_CATES_0_0_32", start_date = "2017"), N = 12 , confidence = c(80))
+#' }
 Forecast <- function(SERIE, N = 6, confidence = c(80), ...) {
   if (confidence == FALSE)
     level <- c(95)
@@ -149,7 +150,7 @@ Forecast <- function(SERIE, N = 6, confidence = c(80), ...) {
     }
   colnames(SERIE.final)[1] <- "y"
   print("Serie extendida " %+% N %+% " per\U00EDodos, usando el modelo auto detectado: " %+% SERIE.model)
-  return(SERIE.final )
+  return(SERIE.final)
 }
 
 # ==========================================================================
@@ -173,7 +174,7 @@ Forecast <- function(SERIE, N = 6, confidence = c(80), ...) {
 #' @examples
 #' \donttest{
 #' #' # Forecast de 12 meses del tipo de cambio
-#' TCN <- vForecast(Get("120.1_PCE_1993_0_24,120.1_ED1_1993_0_26"),12)
+#' TCN <- vForecast(Get("120.1_PCE_1993_0_24,120.1_ED1_1993_0_26", start_date = 2010),12)
 #' }
 vForecast <- function(SERIE, N = 6, ...) {
   attr(SERIE, "frequency") <- freq(SERIE)                                                    # Fijar su frecuencia en base a estimacion de periocididad
