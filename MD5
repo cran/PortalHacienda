@@ -1,12 +1,12 @@
-693da932110314fadf6d4b572531b280 *DESCRIPTION
+0c37e21a10beba104d182890f4928e60 *DESCRIPTION
 6f843d63dbc3ad7f9f82abce64196584 *NAMESPACE
-b3a14aadaf6d4524bb01d08324a366bf *R/FuncionesAcceso.R
-5d944543d9945be715252aa5b3c7b5b1 *README.md
+cf65f18cac94bbe6997bff189828acfd *R/FuncionesAcceso.R
+3a44e26ed77e07213fb240258081dee5 *README.md
 7cfaa27b41d4d61e4e878e81d8f4b206 *man/Forecast.Rd
-ebf1733766caf600f8d8563049c13c6a *man/Get.Rd
+8a8c22924c6cb4c2aa4a1fd2323ccf11 *man/Get.Rd
 6935dc9ab73e54fc987f173243a111cf *man/PortalHacienda.Rd
 497dd3f40476b2b5e289fa5d72e68ba5 *man/Search_online.Rd
 58da7d504310089c67db45b52bc847c2 *man/figures/README-example2-1.png
-e3f12f82ba60e1e169a76e4ba03236be *man/figures/README-example3-1.png
+7e9ae30585cfb366fc18089f8141c9c7 *man/figures/README-example3-1.png
 0afaf66323b1602a2e4915d6d222b10b *man/figures/logo.png
 8d6a8d9d068d54e1b8b5f3b4073b81da *man/vForecast.Rd
