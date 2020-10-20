@@ -9,14 +9,14 @@
 
 # Importar el operador de pipe
 #' @importFrom magrittr "%>%"
-#' @importFrom utils "download.file"
+
 utils::globalVariables(c("serie_descripcion", "serie_id"))   # Evitar notes del check
 
 # Mensaje de Bienvenida
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage(
     "=============================================================================" %+% "\n" %+%
-    "Acceso API Portal Datos Hacienda - v 0.1.4 - 07-2020 por F.Garc" %+%
+    "Acceso API Portal Datos Hacienda - v 0.1.5 - 08-2020 por F.Garc" %+%
     "\U00ED" %+% "a D" %+% "\U00ED" %+% "az" %+% "\n")
 }
 
@@ -56,9 +56,6 @@ freq <- function(x) {
 #' @examples
 #' # Cargar serie mensual de TCN
 #' TCN     <- Get("174.1_T_DE_CATES_0_0_32", start_date = "2017")
-#' # Cargar serie mensual de TCN, transformada en anual y en variaciones
-#' TCN <- Get("174.1_T_DE_CATES_0_0_32", start_date = 2015, collapse = "year",
-#' collapse_aggregation = "avg", representation_mode = "percent_change")
 Get <- function(series, start_date = NULL, end_date = NULL, representation_mode = NULL,
                 collapse = NULL, collapse_aggregation = NULL, limit = 1000, timeout = 10,
                 detail = FALSE) {
@@ -254,7 +251,7 @@ Search_online <- function(PATTERN = "*") {
 }
 
 
-#' PortalHacienda: Interface R a la API de datos del Ministerio de Hacienda
+#' PortalHacienda: Interfase R a la API de datos del Ministerio de Hacienda
 #'
 #' Un paquete R para acceder a la API del portal de datos del Ministerio de Hacienda de la República Argentina.
 #' Se proveen funciones para buscar, descargar y proyectar las series de tiempo de la base.
