@@ -1,7 +1,7 @@
 Package: PortalHacienda
 Type: Package
 Title: Acceder Con R a Los Datos Del Portal De Hacienda
-Version: 0.1.5
+Version: 0.1.6
 Authors@R: person("Fernando", "Garcia Diaz", email = "fmgarciadiaz78@gmail.com",
                   role = c("aut", "cre"))
 Description: Obtener listado de datos, acceder y extender series del Portal de 
@@ -16,14 +16,14 @@ LazyData: true
 URL: https://github.com/fmgarciadiaz/PortalHacienda-CRAN
 Imports: dplyr (>= 0.8.5), forecast (>= 8.12), timetk (>= 2.0),
         lubridate (>= 1.7.8), xts (>= 0.12-0), httr, tibble (>= 3.0.1),
-        magrittr (>= 1.5), zoo (>= 1.8-8), curl
+        magrittr (>= 1.5), zoo (>= 1.8-8), curl, purrr
 RoxygenNote: 7.1.1
 Depends: R (>= 3.6.0)
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2020-10-10 22:47:49 UTC; fernandogarciadiaz
+Packaged: 2020-11-19 01:20:51 UTC; fmgarciadiaz
 Author: Fernando Garcia Diaz [aut, cre]
 Maintainer: Fernando Garcia Diaz <fmgarciadiaz78@gmail.com>
 Repository: CRAN
-Date/Publication: 2020-10-20 07:00:41 UTC
+Date/Publication: 2020-11-19 08:20:14 UTC
